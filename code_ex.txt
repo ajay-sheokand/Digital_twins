@@ -1,0 +1,53 @@
+ball.cs
+
+using UnityEngine;
+
+public class ball : MonoBehaviour
+{
+    public Rigidbody ball_rigidbody;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        ball_rigidbody.AddForce(transform.forward * 2500f);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Cylinder")
+        {
+           print("You Lose!");
+        }
+    }
+}
+
+
+
+PlayerMovement.cs
+
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public Rigidbody my_rigidbody;
+    
+    
+    
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
+    
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if(Input.GetKey("a") || Input.GetKey("d"))
+        {
+            // Apply movement logic here
+            Vector3 my_input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            my_rigidbody.MovePosition(transform.position + my_input * Time.deltaTime * 5f);
+        }
+    }
+}
